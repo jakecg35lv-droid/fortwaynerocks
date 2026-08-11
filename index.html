@@ -97,6 +97,8 @@
   .product-card:hover .product-img img { transform: scale(1.04); }
   .product-img { overflow: hidden; aspect-ratio: 4/3; }
   .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+  /* The FireBoulder photo is portrait-oriented, so give it its own crop without changing the card size. */
+  .product-card-fireboulder .product-img img { object-position: center 58%; }
   .product-info { padding: 22px 24px 28px; }
   .product-tag { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
   .product-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; line-height: 1.2; margin-bottom: 10px; }
@@ -199,8 +201,9 @@
   .fb-includes-list { list-style: none; }
   .fb-includes-list li { font-size: 14px; line-height: 1.7; color: var(--slate); padding: 10px 0; border-bottom: 1px solid var(--border); }
   .fb-includes-list li:last-child { border-bottom: none; }
-  .fb-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin: 0 48px 80px; }
-  .fb-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .fb-gallery { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 2px; margin: 0 48px 80px; overflow: hidden; background: var(--border); }
+  .fb-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center; display: block; transition: transform 0.45s ease, filter 0.45s ease; }
+  .fb-gallery img:hover { transform: scale(1.025); filter: brightness(1.04) saturate(1.05); }
 
   /* ABOUT */
   .about-mission { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
@@ -303,7 +306,8 @@
     .home-products { grid-template-columns: 1fr; }
     .landscape-grid { grid-template-columns: 1fr; }
     .size-product-grid { grid-template-columns: 1fr; }
-    .fb-gallery { grid-template-columns: repeat(2, 1fr); }
+    .fb-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fb-gallery img:last-child { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
     .footer-grid { grid-template-columns: 1fr; }
   }
 
@@ -417,8 +421,7 @@
       <div class="product-img"><img src="images/architectural-1.jpg" alt="Architectural Stone"></div>
       <div class="product-info"><p class="product-tag">Building</p><h3 class="product-name">Architectural Stone</h3><p class="product-desc">Thin and full-bed depth veneer in a full range of shapes, styles, and custom blends.</p></div>
     </div>
-    <div class="product-card" onclick="goTo('fireboulder')">
-      <!-- TODO: replace with a real FireBoulder product photo -->
+    <div class="product-card product-card-fireboulder" onclick="goTo('fireboulder')">
       <div class="product-img"><img src="images/IMG_2557.jpg" alt="FireBoulder"></div>
       <div class="product-info"><p class="product-tag">Fire Features</p><h3 class="product-name">FireBoulder</h3><p class="product-desc">Real stone fire features engineered for natural gas or propane. Built to live outside.</p></div>
     </div>
